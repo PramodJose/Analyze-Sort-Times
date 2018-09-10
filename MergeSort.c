@@ -66,5 +66,6 @@ void mSort(int *arr, int l, int r, int n)	//The last argument is sent to calcula
 */
 void mergeSort(int *arr, int n)
 {
+	MASK -= 1;	//The reason for this decrementation has been explained in BubSort.c file.
 	mSort(arr, 0, n - 1, n);
 }

@@ -2,6 +2,7 @@ void selSort(int *arr, int n)
 {
 	int i, j, t, pos;
 
+	MASK -= 1;	//The reason for this decrementation has been explained in BubSort.c file.
 	for(i = 0; i < n -1; ++i)
 	{
 		if((i & MASK) == 0)

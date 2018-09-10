@@ -58,7 +58,7 @@ void calculateMasks(int size)
 {
 	if(size == 0)
 	{
-		int iterations = (log(MAX_ARR_SIZE) - log(MIN_ARR_SIZE))/log(STEP) + 1, i, j, k = 0;
+		int iterations = (log10(MAX_ARR_SIZE) - log10(MIN_ARR_SIZE))/log10(STEP) + 1, i, j, k = 0;
 		MASKS = malloc(iterations * sizeof(int));
 
 		for(i = MIN_ARR_SIZE; i <= MAX_ARR_SIZE; i *= STEP, ++k)
@@ -85,7 +85,7 @@ void calculateMasks(int size)
 	}
 	else
 	{
-		int i = (log(size) - log(MIN_ARR_SIZE))/log(STEP);
+		int i = (log10(size) - log10(MIN_ARR_SIZE))/log10(STEP);
 		MASK = MASKS[i];
 	}
 }

@@ -1,7 +1,8 @@
 void insSort(int *arr, int n)
 {
 	int i, p, t;
-	
+
+	MASK -= 1;	//The reason for this decrementation has been explained in BubSort.c file.
 	for(i = 1; i < n; ++i)
 	{
 		if((i & MASK) == 0)
