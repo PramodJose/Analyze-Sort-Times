@@ -54,14 +54,23 @@ void buildMaxHeap(int *arr, int size)
 
 void heapSort(int *arr, int n)
 {
-	int i, size = n;
-	//nextMilestone = MILESTONE;
+	int t, size = n;
+	MASK -= 1;
+	printf("0%% completed");
+	fflush(NULL);
+
 	buildMaxHeap(arr, n);	//This takes O(n) time.
 
-	for(i = n -1; i > 0; --i)	//This takes O(n logn) time.
+	for(--n; n > 0; --n)	//This takes O(n logn) time.
 	{
-		swap(&arr[0], &arr[i]);
-		--n;
+		swap(&arr[0], &arr[n]);	//Swap the first and last elements.
+
+		if(((t = size -n) & MASK) == 0)
+		{
+			printf("\t\t\t\t\r%lf%% completed", (t * 100.0)/size);
+			fflush(NULL);
+		}
+
 		maxHeapify(arr, 0, n);
 	}
 }
