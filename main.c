@@ -10,11 +10,11 @@
 #include "InsSort.c"
 #include "MergeSort.c"
 #include "QuickSort.c"
-//#include "ModQSort.c"
+#include "ModQSort.c"
 #include "HeapSort.c"
 
-FuncPtr funcArr[] = {bubSort, selSort, insSort, mergeSort, quickSort, /*modQSort,*/ heapSort};
-char* names[] = {"Bubble Sort", "Selection Sort", "Insertion Sort", "Merge Sort", "Quick Sort", /*"Modified Quick Sort",*/ "Heap Sort"};
+FuncPtr funcArr[] = {bubSort, selSort, insSort, mergeSort, quickSort, modQSort, heapSort};
+char* names[] = {"Bubble Sort", "Selection Sort", "Insertion Sort", "Merge Sort", "Quick Sort", "Modified Quick Sort", "Heap Sort"};
 int noOfFuncs = sizeof(funcArr)/sizeof(FuncPtr);
 
 void main()
@@ -33,8 +33,21 @@ void main()
 	for(i = 0; i < noOfFuncs; ++i)
 	{
 		formatFile(outFile, FILE_DIVIDER);
-		fprintf(outFile, "%-30s", names[i]);
-		printf("\nWorking on %s...", names[i]);
+
+		//If the function is Modified Quick Sort, then append the CUT OFF limit in brackets when printing the algorithm name to the file...
+		if(funcArr[i] == modQSort)
+		{
+			char buffer[32];
+			sprintf(buffer, "%s (%d)", names[i], MOD_QSORT_CUT_OFF);
+			fprintf(outFile, "%-30s", buffer);
+			printf("\nWorking on %s...", buffer);
+		}
+		else	//...else, just print the name of the algorithm as is.
+		{
+			fprintf(outFile, "%-30s", names[i]);
+			printf("\nWorking on %s...", names[i]);
+		}
+
 		fflush(NULL);
 		
 		for(j = MIN_ARR_SIZE; j <= MAX_ARR_SIZE; j *= STEP)
@@ -63,44 +76,3 @@ void main()
 	calculateMasks(-1);	//Freeing MASKS.
 	fclose(outFile);
 }
-
-/*void main()
-{
-	int arr[] = {57, 23, 95, -5, 9, 45, 10, 7, 8, 12, 75, 36, 85, 123, -9, 54, 0, 1, 10, 48, 74, 81, 65, 16, 31, 98, 100, -4, 74, -85, 96, 48};
-	int	n = sizeof(arr)/sizeof(arr[0]), i;
-	quickSort(arr, n);
-	
-	printf("\n\nThe array is:\n");
-	for(i = 0; i < n; ++i)
-		printf("%d ", arr[i]);
-		
-}*/
-
-/*void main()
-{
-	int arr[] = {57, 23, 95, -5, 9, 45, 10, 7, 8, 12, 75, 36, 85, 123, -9, 54, 0, 1, 10, 48, 74, 81, 65, 16, 31, 98, 100, -4, 74, -85, 96, 48};
-	int n = sizeof(arr)/sizeof(arr[0]), i;
-
-	MASK=7;
-	bubSort(arr, n);
-	printf("\n\nThe array is:\n");
-	for(i = 0; i < n; ++i)
-		printf("%d ", arr[i]);
-	printf("\n");
-}*/
-
-/*void main()
-{
-	int iterations = (log(MAX_ARR_SIZE) - log(MIN_ARR_SIZE))/log(STEP) + 1, i;
-	calculateMasks(0);
-
-	printf("\n\nThe masks are:-\n");
-	for(i = 0; i < iterations; ++i)
-		printf("%d ", MASKS[i]);
-	printf("\n");
-
-	calculateMasks(1024);
-	printf("Mask -> %d\n", MASK);
-
-	calculateMasks(-1);
-}*/
