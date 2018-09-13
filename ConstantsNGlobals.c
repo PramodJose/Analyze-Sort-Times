@@ -5,6 +5,7 @@
 #define FILE_BEG 1
 #define FILE_DIVIDER 2
 #define FILE_END 3
+#define MOD_QSORT_CUT_OFF 32
 
 typedef void (*FuncPtr)(int*, int);
 
