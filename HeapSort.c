@@ -65,12 +65,12 @@ void heapSort(int *arr, int n)
 	{
 		swap(&arr[0], &arr[n]);	//Swap the first and last elements.
 
+		maxHeapify(arr, 0, n);
+
 		if(((t = size -n) & MASK) == 0)
 		{
 			printf("\t\t\t\t\r%lf%% completed", (t * 100.0)/size);
 			fflush(NULL);
 		}
-
-		maxHeapify(arr, 0, n);
 	}
 }
