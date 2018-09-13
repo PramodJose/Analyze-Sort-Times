@@ -67,7 +67,7 @@ void calculateMasks(int size)
 			 /*	The percentage should be updated roughly 100 times (at most 100). It may be updated less than 100 times.
 			 **	calcMask may not be a power of 2, so we find out the smallest power of 2 which is greater than calcMask.
 			 **	For example, if calcMask = 100, our actual mask would be 128. In that case, the percentage is updated after every 128 elements have been sorted.
-			 **	calcMask needs to be a power of 2 because bubble, selection, insertion and merge sort assume that MASK is a power of 2 to display
+			 **	calcMask needs to be a power of 2 because bubble, selection, insertion, merge and heap sort assume that MASK is a power of 2 to display
 			 **	their progress percentage.
 			 */
 
