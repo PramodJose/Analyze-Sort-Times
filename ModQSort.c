@@ -25,7 +25,7 @@ void mQSort(int *arr, int left, int right, int n)
 
 	if(left < right)
 	{
-		if((right - left) > MOD_QSORT_CUT_OFF)
+		if((right - left) > qSortCutOffs[qSortNumber])
 		{
 			pivotPos = partition(arr, left, right);
 
