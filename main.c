@@ -58,17 +58,25 @@ void main()
 		{
 			printf("\n\tArray size-> %d...\n", j);
 			fflush(NULL);
-			arr = malloc(j * sizeof(int));
-			copyArray(arr, j);
-			calculateMasks(j);
 
-			start = clock();
-			(*funcArr[i])(arr, j);
-			timeTaken = (double) (clock() - start);
-			timeTaken = timeTaken / clocksPS;
+			if(j > CUT_OFF_FOR_N2_ALGOS && (funcArr[i] == bubSort || funcArr[i] == selSort || funcArr[i] == insSort))
+			{
+				printf("----- SKIPPED -----");
+				fprintf(outFile, "| %16s ", "TLE");	//Time Limit Exceeded
+			}
+			else
+			{
+				arr = malloc(j * sizeof(int));
+				copyArray(arr, j);
+				calculateMasks(j);
+				start = clock();
+				(*funcArr[i])(arr, j);
+				timeTaken = (double) (clock() - start);
+				timeTaken = timeTaken / clocksPS;
 			
-			fprintf(outFile, "| %16lf ", timeTaken);
-			free(arr);
+				fprintf(outFile, "| %16lf ", timeTaken);
+				free(arr);
+			}
 		}
 
 		//If the number of Modified Quick Sorts have not been exhausted, then we need to run modQSort() again; hence, decrement i.
