@@ -13,8 +13,8 @@
 #include "ModQSort.c"
 #include "HeapSort.c"
 
-FuncPtr funcArr[] = {bubSort, selSort, insSort, mergeSort, quickSort, modQSort, heapSort};
-char* names[] = {"Bubble Sort", "Selection Sort", "Insertion Sort", "Merge Sort", "Quick Sort", "Modified Quick Sort", "Heap Sort"};
+FuncPtr funcArr[] = {bubSort, selSort, insSort, heapSort, mergeSort, quickSort, modQSort};
+char* names[] = {"Bubble Sort", "Selection Sort", "Insertion Sort", "Heap Sort", "Merge Sort", "Quick Sort", "Modified Quick Sort"};
 int noOfFuncs = sizeof(funcArr)/sizeof(FuncPtr);
 
 void main()
@@ -37,8 +37,12 @@ void main()
 		//If the function is Modified Quick Sort, then append the CUT OFF limit in brackets when printing the algorithm name to the file...
 		if(funcArr[i] == modQSort)
 		{
-			char buffer[32];
-			sprintf(buffer, "%s (%d)", names[i], MOD_QSORT_CUT_OFF);
+			char buffer[64];
+			/*	The field length of "Algorithm Name" in the file is assumed to be maximum 30, so a buffer size of 64 is
+			**	not necessary; but it is made 64 so that even if the field length is increased later, it won't be a problem.
+			*/
+
+			sprintf(buffer, "%s (%d)", names[i], qSortCutOffs[qSortNumber]);
 			fprintf(outFile, "%-30s", buffer);
 			printf("\nWorking on %s...", buffer);
 		}
@@ -66,6 +70,11 @@ void main()
 			fprintf(outFile, "| %16lf ", timeTaken);
 			free(arr);
 		}
+
+		//If the number of Modified Quick Sorts have not been exhausted, then we need to run modQSort() again; hence, decrement i.
+		if(funcArr[i] == modQSort && ++qSortNumber != noOfQSorts)
+			--i;
+
 		fprintf(outFile, "\n");
 		printf("\n============ Completed ============\n");
 		fflush(NULL);
