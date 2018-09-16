@@ -43,6 +43,10 @@ void formatFile(FILE *p, int position)
 		}
 		fprintf(p, "\n");
 	}
+	if(position == FILE_END)
+	{
+		fprintf(p, "\nTLE - Time Limit Exceeded\nNOTE: The same array is passed to all the algorithms; thus they have a level playing field.");
+	}
 }
 
 
