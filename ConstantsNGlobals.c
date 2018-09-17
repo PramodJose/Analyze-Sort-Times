@@ -11,6 +11,6 @@ typedef void (*FuncPtr)(int*, int);
 
 int *array, *MASKS, MASK;
 
-int qSortCutOffs[] = {8, 16, 32, 64};	//The sweet spot is 16.
+int qSortCutOffs[] = {8, 16, 32, 64};	//The sweet spot is roughly between 16 and 32.
 int qSortNumber = 0;	//This variable is used to stored the index of the currently running modified Quick Sort version.
 int noOfQSorts = sizeof(qSortCutOffs)/sizeof(qSortCutOffs[0]);
